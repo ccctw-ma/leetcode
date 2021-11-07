@@ -6,7 +6,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Random;
 
-public class test6_1 {
+public class test6_2 {
 
 
     static class TreeNode {
@@ -46,36 +46,16 @@ public class test6_1 {
         return root;
     }
 
-    public static TreeNode generateTree2(int num) {
-        Random random = new Random();
-        Deque<TreeNode> deque = new ArrayDeque<>();
-        TreeNode root = new TreeNode(1);
-        deque.add(root);
-        int index = 2;
-        while (index <= num) {
-            int n = deque.size();
-            for (int k = 0; k < n; k++) {
-                TreeNode temp = deque.removeFirst();
-                if (temp.value == 0) {
-                    temp.left = new TreeNode(0);
-                    temp.right = new TreeNode(0);
-                } else {
-                    TreeNode left = judge(random) ? new TreeNode(index++) : new TreeNode(0);
-                    TreeNode right = judge(random) ? new TreeNode(index++) : new TreeNode(0);
-                    temp.left = left;
-                    temp.right = right;
-                }
-                deque.add(temp.left);
-                deque.add(temp.right);
-            }
-        }
-        return root;
-    }
 
-    public static int leaf(TreeNode root) {
-        if (root == null) return 0;
-        if (root.left == null && root.right == null) return 1;
-        return leaf(root.left) + leaf(root.right);
+
+    public static void  exchange(TreeNode root){
+        if(root==null) return;
+        TreeNode temp;
+        exchange(root.left);
+        exchange(root.right);
+        temp = root.left;
+        root.left = root.right;
+        root.right = temp;
     }
 
     public static String flattenTree(TreeNode root) {
@@ -107,8 +87,8 @@ public class test6_1 {
 
     public static void createFile() {
         try {
-            File inputFile = new File("src/BUPT/OJ/chapter6/test01.in");
-            File outputFile = new File("src/BUPT/OJ/chapter6/test01.out");
+            File inputFile = new File("src/BUPT/OJ/chapter6/test02.in");
+            File outputFile = new File("src/BUPT/OJ/chapter6/test02.out");
             if (inputFile.exists()) inputFile.delete();
             if (outputFile.exists()) outputFile.delete();
             boolean inIsOK = inputFile.createNewFile();
@@ -127,7 +107,8 @@ public class test6_1 {
                     String res = flattenTree(root);
                     res += " -1\n";
                     in.write(res);
-                    out.write(leaf(root) + "\n");
+                    exchange(root);
+                    out.write(flattenTree(root) + "\n");
                 }
                 in.flush();
                 out.flush();

@@ -19,8 +19,6 @@ package Difficult.D_BFSTest;
 除法运算符 / 表示实数除法，而不是整数除法。例如 4 / (1 - 2/3) = 12 。
 每个运算符对两个数进行运算。特别是我们不能用 - 作为一元运算符。例如，[1, 1, 1, 1] 作为输入时，表达式 -1 - 1 - 1 - 1 是不允许的。
 你不能将数字连接在一起。例如，输入为 [1, 2, 1, 2] 时，不能写成 12 + 12 。*/
-
-import javax.resource.spi.work.DistributableWork;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,17 +91,6 @@ public class judgePoint24 {
 
 
     public static void main(String[] args) {
-        Thread thread=new Thread(new DistributableWork() {
-            @Override
-            public void release() {
 
-            }
-
-            @Override
-            public void run() {
-
-            }
-        });
-        thread.start();
     }
 }
