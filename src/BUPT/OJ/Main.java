@@ -1,6 +1,8 @@
 package BUPT.OJ;
 
 
+import BUPT.OJ.chapter9.test9_01;
+
 import java.io.BufferedInputStream;
 import java.util.*;
 
@@ -81,11 +83,55 @@ public class Main {
         return builder.toString();
     }
 
+
+    public static int getLevel(TreeNode root, int level, int target) {
+        if (root.value == target) {
+            return level;
+        } else if (root.value > target) {
+            if (root.left == null) {
+                return -1;
+            }
+            return getLevel(root.left, level + 1, target);
+        } else {
+            if (root.right == null) {
+                return -1;
+            }
+            return getLevel(root.right, level + 1, target);
+        }
+    }
+
+    public static String flattenTree(TreeNode root) {
+        Deque<TreeNode> deque = new ArrayDeque<>();
+        deque.add(root);
+        StringBuilder builder = new StringBuilder();
+        builder.append(root.value).append(" ");
+        while (!deque.isEmpty()) {
+            int n = deque.size();
+            for (int i = 0; i < n; i++) {
+                TreeNode temp = deque.removeFirst();
+                if (temp.left == null) {
+                    builder.append(0).append(" ");
+                } else {
+                    builder.append(temp.left.value).append(" ");
+                    deque.add(temp.left);
+                }
+                if (temp.right == null) {
+                    builder.append(0).append(" ");
+                } else {
+                    builder.append(temp.right.value).append(" ");
+                    deque.add(temp.right);
+                }
+            }
+        }
+        return builder.toString();
+    }
+
     public static void main(String[] args) {
         Scanner in = new Scanner(new BufferedInputStream(System.in));
         int T = in.nextInt();
         while ((T--) > 0) {
             Deque<TreeNode> deque = new ArrayDeque<>();
+            int tar = in.nextInt();
             int next = in.nextInt();
             List<Integer> list = new ArrayList<>();
             while (next != -1) {
@@ -115,10 +161,8 @@ public class Main {
                     }
                 }
             }
-            preTreeNode = null;
-            inThreadOrder(root);
-            System.out.println(findPriorAndNextNode(root));
-
+//            System.out.println(flattenTree(root));
+            System.out.println(getLevel(root,1,tar));
         }
 
     }
