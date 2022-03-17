@@ -8,7 +8,10 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.*;
 import java.security.SecureRandom;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.HashSet;
+import java.util.Set;
 
 public class test extends parent{
 
@@ -86,6 +89,37 @@ public class test extends parent{
         }
     }
 
+
+    public static long minimalKSum(int[] nums, int k) {
+        Set<Long> set = new HashSet<>();
+        for(long i : nums) set.add(i);
+        Long[] arr = new Long[set.size()];
+        int ii =0;
+        for (long e:set){
+            arr[ii++] = e;
+        }
+        Arrays.sort(arr,(a,b)-> (int) (a-b));
+
+        long index = 1, i = 0;
+        long res = 0;
+        while (k != 0) {
+            if (i < arr.length) {
+                long n = arr[(int) i] - index;
+                long nn = Math.min(n, k);
+                long r = index + nn - 1;
+                res += (index + r) * nn / 2;
+                k -= nn;
+                index = arr[(int) i] + 1;
+                i++;
+            } else {
+                res += ((index + index + k - 1) * k) / 2;
+                k = 0;
+            }
+        }
+        return res;
+    }
+
+
     public static void range() {
         long TimeNanos = (long) (9.859706 * 1e13);
         long FullBiasNanos = (long) (-1.315528257385472798 * 1e18);
@@ -101,7 +135,7 @@ public class test extends parent{
 
     public static void main(String[] args) throws IOException, ParseException {
 
-        processCexe();
+        System.out.println(minimalKSum(new int[]{1000000000},1000000000));
 
     }
 
