@@ -12,7 +12,7 @@ if __name__ == '__main__':
         groups = re.match(pattern, s).groups()
         print(groups)
 
-    print("Hello world");
+    print("Hello world")
     '''
     结果
     ('1995', '6', '1')
