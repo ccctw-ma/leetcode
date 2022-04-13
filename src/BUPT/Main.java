@@ -16,6 +16,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         Scanner in = new Scanner(new BufferedInputStream(System.in));
         int T = in.nextInt();
+
         while ((--T)>=0){
             int n = in.nextInt();
             int k = in.nextInt();
