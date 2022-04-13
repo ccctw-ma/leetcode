@@ -11,3 +11,14 @@ from itemadapter import ItemAdapter
 class MyspiderPipeline:
     def process_item(self, item, spider):
         return item
+
+
+import es_type
+
+
+class ElasticsearchPipeline:
+
+    def process_item(self, item, spider):
+        sn = es_type.MusicType(item)
+        sn.save()
+        return item

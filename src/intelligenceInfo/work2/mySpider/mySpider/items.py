@@ -12,5 +12,5 @@ class MyspiderItem(scrapy.Item):
     pass
 
 
-class migu_item(scrapy.item):
+class MusicItem(scrapy.item):
     song_name = scrapy.Field()

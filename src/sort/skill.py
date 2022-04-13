@@ -1,6 +1,8 @@
 import collections
+import queue
 import time
 from functools import lru_cache, reduce
+
 from operator import or_
 
 
@@ -64,12 +66,12 @@ def usage_of_bisect():
     """
     a = [1, 2, 2, 5, 8]
     position = bisect.bisect(a, 7)  # 找到插入位置
-    print(position)
+    # print(position)
     # 4
     bisect.insort(a, 4)  # 找到位置插入
-    print(a)
+    # print(a)
     # [1, 2, 2, 4, 5, 8]
-    bisect.bisect_left(a, 2)  # 插到左侧
+    print(bisect.bisect_left(a, 2))
     # 1
     bisect.bisect_right(a, 2)  # 插到右侧
     # 3
@@ -169,11 +171,26 @@ def reduce_function():
     print(ans)
 
 
+# 18、heapq
+def heapq_function():
+    import heapq
+    heap = []
+    for i in range(11, 0, -1):
+        heapq.heappush(heap, i)
+    print(heap)
+    # print(heapq.heappop(heap))
+    print(heapq.nlargest(5, heap))
+    print(heapq.nsmallest(5, heap))
+    print(heapq.heappushpop(heap, 20))
+
+
 if __name__ == '__main__':
     # t1 = time.time()
     # print(fibonacci(200))
     # t2 = time.time()
     # print(t2 - t1)
     # reduce_function()
-    dictionary_traversal()
+    # dictionary_traversal()
     # PriorityQueue_structure()
+    # print(usage_of_bisect())
+    heapq_function()
