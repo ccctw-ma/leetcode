@@ -1,7 +1,7 @@
 import scrapy
 
 from lxml import etree
-
+# from mySpider.items import MusicItem
 
 class MiguSpider(scrapy.Spider):
     name = 'migu'
@@ -15,4 +15,8 @@ class MiguSpider(scrapy.Spider):
                                '@class="song-name"]/a')
         for song_name in name_list:
             print(song_name.text)
+            item = {
+                'song_name' : song_name.text
+            }
+            yield item
 
