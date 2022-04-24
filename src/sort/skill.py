@@ -73,7 +73,8 @@ def usage_of_bisect():
     # [1, 2, 2, 4, 5, 8]
     print(bisect.bisect_left(a, 2))
     # 1
-    bisect.bisect_right(a, 2)  # 插到右侧
+    print(bisect.bisect_right(a, 2))
+    print(bisect.bisect(a, 2))
     # 3
 
 
@@ -192,5 +193,5 @@ if __name__ == '__main__':
     # reduce_function()
     # dictionary_traversal()
     # PriorityQueue_structure()
-    # print(usage_of_bisect())
-    heapq_function()
+    print(usage_of_bisect())
+    # heapq_function()
