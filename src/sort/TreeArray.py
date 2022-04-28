@@ -15,8 +15,9 @@ def update(i, k):
         i += i & (-i)
 
 
-i = 2
-while i < 5000:
+i = 10
+while i > 0:
     print(i)
-    i += i & (-i)
+    i -= i & (-i)
+
 

@@ -185,6 +185,17 @@ def heapq_function():
     print(heapq.heappushpop(heap, 20))
 
 
+def sorted_container_function():
+    import sortedcontainers
+    arr = sortedcontainers.SortedList()
+    arr.add(4)
+    arr.add(6)
+    arr.add(1)
+    arr.add(2)
+    for i in arr:
+        print(i)
+
+
 if __name__ == '__main__':
     # t1 = time.time()
     # print(fibonacci(200))
@@ -193,5 +204,6 @@ if __name__ == '__main__':
     # reduce_function()
     # dictionary_traversal()
     # PriorityQueue_structure()
-    print(usage_of_bisect())
+    # print(usage_of_bisect())
     # heapq_function()
+    sorted_container_function()
