@@ -5,8 +5,10 @@ from functools import lru_cache, reduce
 
 from operator import or_
 
-
 # 1、求字符差值
+import sortedcontainers
+
+
 def find_character_difference():
     print(ord('a') - ord('c'))
 
@@ -71,9 +73,9 @@ def usage_of_bisect():
     bisect.insort(a, 4)  # 找到位置插入
     # print(a)
     # [1, 2, 2, 4, 5, 8]
-    print(bisect.bisect_left(a, 2))
+    print(bisect.bisect_left(a, 8))
     # 1
-    print(bisect.bisect_right(a, 2))
+    print(bisect.bisect_right(a, 8))
     print(bisect.bisect(a, 2))
     # 3
 
@@ -186,7 +188,7 @@ def heapq_function():
 
 
 def sorted_container_function():
-    import sortedcontainers
+    from sortedcontainers import SortedList
     arr = sortedcontainers.SortedList()
     arr.add(4)
     arr.add(6)
@@ -203,7 +205,8 @@ if __name__ == '__main__':
     # print(t2 - t1)
     # reduce_function()
     # dictionary_traversal()
+    usage_of_bisect()
     # PriorityQueue_structure()
     # print(usage_of_bisect())
     # heapq_function()
-    sorted_container_function()
+    # sorted_container_function()
