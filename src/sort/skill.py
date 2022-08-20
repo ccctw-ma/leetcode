@@ -1,4 +1,5 @@
 import collections
+import itertools
 import queue
 import time
 from functools import lru_cache, reduce
@@ -146,6 +147,13 @@ def zip_function():
         print(f'{team} plays in {league}. Country: {country}')
 
 
+def zip_longest_function():
+    arr1 = ['a', 'b', 'c']
+    arr2 = ['1', '2', '3', '4']
+    for letter, number in itertools.zip_longest(arr1, arr2, fillvalue='*'):
+        print(letter, number)
+
+
 # 15、collections.OrderedDict有序字典
 def OrderedDict_structure():
     """
@@ -187,15 +195,82 @@ def heapq_function():
     print(heapq.heappushpop(heap, 20))
 
 
+# 19 sortedcontainers
 def sorted_container_function():
     from sortedcontainers import SortedList
-    arr = sortedcontainers.SortedList()
+    arr = sortedcontainers.SortedList(key=lambda x: -x)
+
     arr.add(4)
     arr.add(6)
     arr.add(1)
     arr.add(2)
     for i in arr:
         print(i)
+
+    valueSortedDict = sortedcontainers.SortedValuesView()
+
+
+# 20、usageofsort
+def usage_of_sortfunc():
+    arr = [(1, 2), (1, 1), (1, 3), (4, 2), (4, 1), (5, 2), (1, 10), (1, -2)]
+    arr.sort(key=lambda x: (x[0] ** 2, -x[1]))
+
+    print(arr)
+    ss = ['a', 'aa', 'ab', 'cc', 'abc']
+    print(sorted(ss, key=lambda x: (-len(x), ord(x[-1]))))
+
+
+# 21、usageofitertools
+def usage_of_itertools():
+    arr = [1, 2, 3, 4, 5]
+
+    def fn(a, b):
+        return a * b
+
+    # 求前缀和
+    print(list(itertools.accumulate(arr)))
+    print(list(itertools.accumulate(arr, fn)))
+
+    # 返回迭代表中元素的连续r长度组合。
+    print(list(itertools.combinations(arr, 2)))
+    for i, j, k, l in itertools.combinations(arr, 4):
+        print(i, j, k, l)
+
+    # 指针不用从+1开始
+    print(list(itertools.combinations_with_replacement(arr, 2)))
+
+    # 排列组合
+    print(list(itertools.permutations(arr, 2)))
+
+    #  product(A, B) returns the same as:  ((x,y) for x in A for y in B).
+    print(list(itertools.product([1, 2, 3], [4, 5, 6])))
+
+
+def countSpecialNumbers(self, n: int) -> int:  # 小于等于n的  没有重复digit的num 的 个数
+    digits = []
+    while n > 0:
+        digits.append(n % 10)
+        n //= 10
+    digits = digits[::-1]  # 从左至右 存储n的每一位上的数字
+    k = len(digits)
+    visited = [0 for _ in range(10)]  # 记录从左至右 n用了几次了！！！！！！！！
+    res = 0
+    # 前面是0的情况 0XXXXX  00XXXXX  000XXXX 00000XXX 有效数字的位数自然就是k-1 ~ 1位
+    for i in range(1, k):
+        res += 9 * self.A(i - 1, 9)  # 有效的i位中，首位有1~9 共9种选择  后面的i-1位是从9中挑选（i-1）种  有序排列
+    # 前面没有0
+    for i in range(0, k):  # n从左至右遍历
+        num = digits[i]
+        min_digit = 1 if i == 0 else 0
+        for x in range(min_digit, num):  # 4567   选择第0位  第0位可选的数在1~3中选择  选择第1位  可选的数为0~4（4）
+            if visited[x] == 0:  # n没用过！！！！！！！！！！！
+                res += self.A(k - i - 1, 10 - i - 1)
+        visited[num] += 1
+        if visited[num] > 1:  # 4456  整理完44以后，就不用整理了  4400~4456一定是有重复的
+            break
+        if i == k - 1:  # 我们都是让x比num小，如果一直到最后一位了，n本身也算一个的
+            res += 1
+    return res
 
 
 if __name__ == '__main__':
@@ -208,5 +283,7 @@ if __name__ == '__main__':
     # usage_of_bisect()
     # PriorityQueue_structure()
     # print(usage_of_bisect())
-    heapq_function()
+    # heapq_function()
     # sorted_container_function()
+    # zip_longest_function()
+    usage_of_itertools()
