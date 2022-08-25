@@ -34,3 +34,5 @@ if __name__ == '__main__':
     arr = [1, 2, 3]
     # arr = [i if i == 2 else 2 for i in arr]
     print(list(itertools.permutations([1, 2, 3, 4], 4)))
+
+    print("i love eating burger".split(" "))
