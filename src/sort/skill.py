@@ -3,6 +3,7 @@ import itertools
 import queue
 import time
 from functools import lru_cache, reduce
+from math import perm, comb
 
 from operator import or_
 
@@ -244,6 +245,9 @@ def usage_of_itertools():
 
     #  product(A, B) returns the same as:  ((x,y) for x in A for y in B).
     print(list(itertools.product([1, 2, 3], [4, 5, 6])))
+
+    print(perm(4, 2))
+    print(comb(4, 2))
 
 
 def countSpecialNumbers(self, n: int) -> int:  # 小于等于n的  没有重复digit的num 的 个数
