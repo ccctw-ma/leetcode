@@ -1,4 +1,5 @@
 import bisect
+from bisect import bisect_left
 from typing import List
 
 
@@ -33,21 +34,35 @@ class Solution:
         #     c = len(buc[y]) - index
         #     res.append(c)
         # return res
-        buc = []
-        for rec in rectangles:
-            buc.append(rec + [-1])
-        for i, p in enumerate(points):
-            buc.append(p + [i])
-        buc.sort(key=lambda x: (-x[0], x[2]))
-        res = [0] * len(points)
-        ct = [0] * 101
-        for x, y, index in buc:
-            if index == -1:
-                for i in range(1, y + 1):
-                    ct[i] += 1
-            else:
-                res[index] = ct[y]
-        return res
+
+        # buc = []
+        # for rec in rectangles:
+        #     buc.append(rec + [-1])
+        # for i, p in enumerate(points):
+        #     buc.append(p + [i])
+        # buc.sort(key=lambda x: (-x[0], x[2]))
+        # res = [0] * len(points)
+        # ct = [0] * 101
+        # for x, y, index in buc:
+        #     if index == -1:
+        #         for i in range(1, y + 1):
+        #             ct[i] += 1
+        #     else:
+        #         res[index] = ct[y]
+        # return res
+
+        n = len(points)
+        ans = [0] * n
+        i, xs = 0, []
+        for id, (x, y) in sorted(enumerate(points), key=lambda x: -x[1][1]):
+            start = i
+            while i < len(rectangles) and y <= rectangles[i][1]:
+                xs.append(rectangles[i][0])
+                i += 1
+            if start < i:
+                xs.sort()
+            ans[id] = i - bisect_left(xs, x)
+        return ans
 
     def fullBloomFlowers(self, flowers: List[List[int]], persons: List[int]) -> List[int]:
         buc = []
