@@ -3,22 +3,13 @@ from typing import List
 
 class Solution:
     def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
-        pushIdx, popIdx = 0, 0
-        stk = []
-        n = len(pushed)
-        while pushIdx < n:
-            # 入栈
-            while pushIdx < n and popIdx < n and pushed[pushIdx] != popped[popIdx]:
-                stk.append(pushed[pushIdx])
-                pushIdx += 1
-            pushIdx += 1
-            popIdx += 1
-            # 出栈
-            while stk and popIdx < n and stk[-1] == popped[popIdx]:
-                stk.pop()
-                popIdx += 1
-
-        return len(stk) == 0
+        st, j = [], 0
+        for x in pushed:
+            st.append(x)
+            while st and st[-1] == popped[j]:
+                st.pop()
+                j += 1
+        return len(st) == 0
 
 
 if __name__ == '__main__':
