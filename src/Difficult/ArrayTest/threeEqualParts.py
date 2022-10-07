@@ -3,7 +3,7 @@ from typing import List
 
 # 1的个数必须是3的整数倍 将1等分成3份 再根据最后一份末尾0的个数推导 前两份的最后一个坐标，最后判断3份去掉前导0 是不是一样
 class Solution:
-    def threeEqualParts(self, arr: List[int]) -> List[int]:
+    def threeEqualParts2(self, arr: List[int]) -> List[int]:
         n = len(arr)
         ones = sum(arr)
         if ones % 3 != 0:
