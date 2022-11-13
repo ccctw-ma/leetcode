@@ -1,12 +1,9 @@
-R = {
-    'a':(1, 0),
-    'b':(2, 0)
-}
+ff = open("test.txt", 'w')
+ff.write('[' + '\n')
 
-for a, b in R.values():
-    print(a, b)
+with open('./算法平台数据.txt', 'r') as f:
+    for line in f.readlines():
+        ff.write(line + ',')
 
-
-for i in range(10, -1, -1):
-    print(i)
-    i += 1
+ff.write(']')
+ff.close()
