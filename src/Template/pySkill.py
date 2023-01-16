@@ -1,11 +1,16 @@
-import collections
-import itertools
-import queue
-import time
-from functools import lru_cache, reduce
-from math import perm, comb
+import time, re
+from typing import List, Tuple, Union, Optional
+from heapq import heappop, heappush, heapify, heappushpop, heapreplace
+from collections import defaultdict, deque, Counter
+from itertools import accumulate, permutations, combinations, product, compress, zip_longest, pairwise, groupby, \
+    combinations_with_replacement
+from math import perm, comb, gcd, lcm, inf, ceil, floor, factorial, dist, sqrt
+from functools import cache, lru_cache, reduce
+from sortedcontainers import SortedList, SortedSet, SortedDict
+from bisect import bisect_left, bisect_right, insort, insort_left, insort_right
 
 from operator import or_
+from typing import List
 
 # 1、求字符差值
 import sortedcontainers
@@ -24,7 +29,7 @@ def string_reverse():
 # 3、数组元素计数
 def array_element_count():
     arr = [1, 2, 2, 4, 5, 5]
-    print(collections.Counter(arr))
+    print(Counter(arr))
 
 
 # 4、字典遍历
@@ -52,9 +57,9 @@ def initialize_an_array_of_all_0():
 # 6、Counter计数
 def counter_count():
     colors = ['red', 'blue', 'red', 'green', 'blue', 'blue']
-    c = collections.Counter(colors)
+    c = Counter(colors)
     colors2 = ['red', 'red']
-    c2 = collections.Counter(colors2)
+    c2 = Counter(colors2)
     print(c)
     print(dict(c))
     print(dict(c2))
@@ -151,7 +156,7 @@ def zip_function():
 def zip_longest_function():
     arr1 = ['a', 'b', 'c']
     arr2 = ['1', '2', '3', '4']
-    for letter, number in itertools.zip_longest(arr1, arr2, fillvalue='*'):
+    for letter, number in zip_longest(arr1, arr2, fillvalue='*'):
         print(letter, number)
 
 
@@ -229,22 +234,22 @@ def usage_of_itertools():
         return a * b
 
     # 求前缀和
-    print(list(itertools.accumulate(arr)))
-    print(list(itertools.accumulate(arr, fn)))
+    print(list(accumulate(arr)))
+    print(list(accumulate(arr, fn)))
 
     # 返回迭代表中元素的连续r长度组合。
-    print(list(itertools.combinations(arr, 2)))
-    for i, j, k, l in itertools.combinations(arr, 4):
+    print(list(combinations(arr, 2)))
+    for i, j, k, l in combinations(arr, 4):
         print(i, j, k, l)
 
     # 指针不用从+1开始
-    print(list(itertools.combinations_with_replacement(arr, 2)))
+    print(list(combinations_with_replacement(arr, 2)))
 
     # 排列组合
-    print(list(itertools.permutations(arr, 2)))
+    print(list(permutations(arr, 2)))
 
     #  product(A, B) returns the same as:  ((x,y) for x in A for y in B).
-    print(list(itertools.product([1, 2, 3], [4, 5, 6])))
+    print(list(product([1, 2, 3], [4, 5, 6])))
 
     print(perm(4, 2))
     print(comb(4, 2))
@@ -277,6 +282,60 @@ def countSpecialNumbers(self, n: int) -> int:  # 小于等于n的  没有重复d
     return res
 
 
+def is_in_poly(p, poly):  # 判断一个点是否在一个多边形内部
+    """
+    :param p: [x, y]
+    :param poly: [[], [], [], [], ...]
+    :return:
+    """
+    px, py = p
+    is_in = False
+    for i, corner in enumerate(poly):
+        next_i = i + 1 if i + 1 < len(poly) else 0
+        x1, y1 = corner
+        x2, y2 = poly[next_i]
+        if (x1 == px and y1 == py) or (x2 == px and y2 == py):  # if point is on vertex
+            is_in = True
+            break
+        if min(y1, y2) < py <= max(y1, y2):  # find horizontal edges of polygon
+            x = x1 + (py - y1) * (x2 - x1) / (y2 - y1)
+            if x == px:  # if point is on edge
+                is_in = True
+                break
+            elif x > px:  # if point is on left-side of line
+                is_in = not is_in
+    return is_in
+
+
+# o(n ^ 3)求得每个点到另外所有点的最短距离
+def floyd(n: int, g: List[List[int]]):
+    for t in range(n):
+        for a in range(n):
+            for b in range(n):
+                if t != a and t != b:
+                    g[a][b] = min(g[a][b], g[a][t] + g[t][b])
+
+
+def dijkstra(start: int, g: List[List[int]], n: int) -> List[int]:
+    MAX = 10 ** 9 + 7
+    dis = [MAX] * n
+    h = [(0, start)]
+    dis[start] = 0
+    vis = set()
+    while h:
+        cost, x = heappop(h)
+        vis.add(x)
+        # 访问x的邻接点
+        for y, c in g[x]:
+            if y in vis:
+                continue
+            ncost = cost + c
+            if ncost < dis[y]:
+                dis[y] = ncost
+                heappush(h, (ncost, y))
+    return dis
+
+
 if __name__ == '__main__':
     # t1 = time.time()
     # print(fibonacci(200))
@@ -291,3 +350,8 @@ if __name__ == '__main__':
     # sorted_container_function()
     # zip_longest_function()
     usage_of_itertools()
+    # 2 ** 14284
+    num = 10
+    arr = bin(num)[2:]
+    print(arr)
+    print(gcd(0, 2))

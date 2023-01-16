@@ -188,4 +188,5 @@ if __name__ == '__main__':
     print("Hello SegmentTree")
     data = [1, 2, 3, 4, 5, 6]
     tree = XianDuanShu(data, lambda x, y: x + y)
-    print(tree.calc(0, 0, 5, 0, 5))
+    tree.update(0, 0, 5, 5, 100)
+    print(tree.calc(0, 0, 5, 2, 5))
