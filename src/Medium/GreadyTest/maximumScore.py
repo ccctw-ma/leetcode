@@ -11,8 +11,11 @@ import re
 
 
 class Solution:
-    pass
+    def maximumScore(self, a: int, b: int, c: int) -> int:
+        a, b, c = sorted([a, b, c])
+        return a + b if a + b < c else (a + b + c) // 2
 
 
 if __name__ == '__main__':
     s = Solution()
+    print(s.maximumScore(6, 2, 1))

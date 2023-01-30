@@ -44,4 +44,4 @@ class Solution:
 
 if __name__ == '__main__':
     s = Solution()
-    print(s.countDigitOne(13))
+    print(s.countDigitOne2(2))

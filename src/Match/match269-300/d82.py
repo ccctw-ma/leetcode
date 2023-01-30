@@ -39,14 +39,25 @@ class Solution:
         return ans
 
     def minSumSquareDiff(self, nums1: List[int], nums2: List[int], k1: int, k2: int) -> int:
-        k = k1 + k2
-        diff = [0]
-        for a, b in zip(nums1, nums2):
-            diff.append(abs(a - b))
-        diff.sort(reverse=True)
-        n = len(nums1) + len(nums2) + 1
-        for i in range(1, n):
-            d = ()
+        ans, k = 0, k1 + k2
+        for i in range(len(nums1)):
+            nums1[i] = abs(nums1[i] - nums2[i])
+            ans += nums1[i] * nums1[i]
+        if sum(nums1) <= k:
+            return 0  # 所有 a[i] 均可为 0
+        nums1.sort(reverse=True)
+        nums1.append(0)  # 哨兵
+        for i, v in enumerate(nums1):
+            ans -= v * v
+            j = i + 1
+            c = j * (v - nums1[j])
+            if c < k:
+                k -= c
+                continue
+            v -= k // j
+            return ans + k % j * (v - 1) * (v - 1) + (j - k % j) * v * v
+
+
 
 
 if __name__ == '__main__':

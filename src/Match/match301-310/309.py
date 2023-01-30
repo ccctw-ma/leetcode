@@ -52,7 +52,7 @@ class Solution:
         return res
 
     def mostBooked(self, n: int, meetings: List[List[int]]) -> int:
-        # meetings.sort()
+        # meetings.Template()
         # dp = [0] * n
         # ends = [0] * n
         # for i in range(len(meetings)):

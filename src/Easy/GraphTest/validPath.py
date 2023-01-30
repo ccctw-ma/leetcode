@@ -11,7 +11,24 @@ import re
 
 
 class Solution:
-    pass
+    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+
+        p = list(range(n))
+
+        def find(x):
+            while x != p[x]:
+                p[x] = p[p[x]]
+                x = p[x]
+            return x
+
+        def merge(x, y):
+            px, py = find(x), find(y)
+            if px != py:
+                p[py] = px
+
+        for a, b in edges:
+            merge(a, b)
+        return find(source) == find(destination)
 
 
 if __name__ == '__main__':

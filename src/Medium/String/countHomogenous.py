@@ -10,8 +10,21 @@ from bisect import bisect_left, bisect_right, insort, insort_left, insort_right
 
 
 class Solution:
-    pass
+    def countHomogenous(self, s: str) -> int:
+        mod = 10 ** 9 + 7
+        res = 0
+        i = 0
+        n = len(s)
+        while i < n:
+            j = i + 1
+            while j < n and s[j] == s[i]:
+                j += 1
+            span = j - i
+            res += span * (span + 1) // 2
+            i = j
+        return res % mod
 
 
 if __name__ == '__main__':
     s = Solution()
+    print(s.countHomogenous(s="abbcccaa"))

@@ -11,7 +11,21 @@ import re
 
 
 class Solution:
-    pass
+    def canChoose(self, groups: List[List[int]], nums: List[int]) -> bool:
+
+        m, n = len(groups), len(nums)
+        idx = 0
+        i = 0
+        while idx < n:
+
+            if idx + len(groups[i]) <= n and nums[idx:idx + len(groups[i])] == groups[i]:
+                idx = idx + len(groups[i])
+                i += 1
+            else:
+                idx += 1
+            if i == m:
+                break
+        return i == m
 
 
 if __name__ == '__main__':

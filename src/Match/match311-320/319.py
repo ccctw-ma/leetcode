@@ -55,41 +55,50 @@ class Solution:
         return res
 
     def maxPalindromes(self, s: str, k: int) -> int:
+        #
+        # n = len(s)
+        #
+        # # @cache
+        # # def f(i, j):
+        # #     if i >= j:
+        # #         return True
+        # #     return f(i + 1, j - 1) and s[i] == s[j]
+        #
+        # f = [[False] * n for _ in range(n)]
+        # for i in range(n):
+        #     for j in range(i + 1):
+        #         f[i][j] = True
+        # for j in range(n):
+        #     for i in range(j - 1, -1, -1):
+        #         if s[i] == s[j] and f[i + 1][j - 1]:
+        #             f[i][j] = True
+        # # print(f)
+        #
+        # dp = [0] * (n + 1)
+        # for i in range(k, n + 1):
+        #     for span in range(k, i + 1):
+        #         if dp[i - span] + 1 < dp[i]:
+        #             break
+        #         # temp = s[i - span: i]
+        #         # print(temp)
+        #         # print(i - span, i - 1)
+        #         # print(f[i - span][i - 1])
+        #         # if f(i - span, i - 1):
+        #         if f[i - span][i - 1]:
+        #             dp[i] = max(dp[i], dp[i - span] + 1)
+        #
+        #     dp[i] = max(dp[i], dp[i - 1])
+        # # print(dp)
+        # return dp[n]
 
-        n = len(s)
-
-        # @cache
-        # def f(i, j):
-        #     if i >= j:
-        #         return True
-        #     return f(i + 1, j - 1) and s[i] == s[j]
-
-        f = [[False] * n for _ in range(n)]
-        for i in range(n):
-            for j in range(i + 1):
-                f[i][j] = True
-        for j in range(n):
-            for i in range(j - 1, -1, -1):
-                if s[i] == s[j] and f[i + 1][j - 1]:
-                    f[i][j] = True
-        # print(f)
-
-        dp = [0] * (n + 1)
-        for i in range(k, n + 1):
-            for span in range(k, i + 1):
-                if dp[i - span] + 1 < dp[i]:
-                    break
-                # temp = s[i - span: i]
-                # print(temp)
-                # print(i - span, i - 1)
-                # print(f[i - span][i - 1])
-                # if f(i - span, i - 1):
-                if f[i - span][i - 1]:
-                    dp[i] = max(dp[i], dp[i - span] + 1)
-
-            dp[i] = max(dp[i], dp[i - 1])
-        # print(dp)
-        return dp[n]
+        dp = [0] * (len(s) + 1)
+        for i in range(len(s) - 1, -1, -1):
+            dp[i] = dp[i + 1]
+            if i + k <= len(s) and s[i:i + k] == s[i:i + k][::-1]:
+                dp[i] = dp[i + k] + 1
+            elif i + k + 1 <= len(s) and s[i:i + k + 1] == s[i:i + k + 1][::-1]:
+                dp[i] = dp[i + k + 1] + 1
+        return dp[0]
 
 
 if __name__ == '__main__':

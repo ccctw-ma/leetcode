@@ -152,7 +152,7 @@ console.log(findAllPeople(4, [
     [0, 3, 3]
 ], 3));
 
-// console.log([1,2,3,22,58,5,1000,4,5,6].sort((a,b)=>a-b));
+// console.log([1,2,3,22,58,5,1000,4,5,6].Template((a,b)=>a-b));
 
 
 class Node{

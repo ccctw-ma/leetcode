@@ -336,6 +336,55 @@ def dijkstra(start: int, g: List[List[int]], n: int) -> List[int]:
     return dis
 
 
+class DiffMatrix:
+    """二维差分模板(矩阵可变)"""
+
+    def __init__(self, M: List[List[int]]):
+        self.ROW, self.COL = len(M), len(M[0])
+        self.matrix = [[0] * self.COL for _ in range(self.ROW)]
+        for i in range(self.ROW):
+            for j in range(self.COL):
+                self.matrix[i][j] = M[i][j]
+
+        # 需要额外大小为(m+2)∗(n+2)的差分数组，第一行第一列不用(始终为0)
+        self.diff = [[0] * (self.COL + 2) for _ in range(self.ROW + 2)]
+
+    def add(self, r1: int, c1: int, r2: int, c2: int, k: int) -> None:
+        """区间更新A[r1:r2+1, c1:c2+1]"""
+        self.diff[r1 + 1][c1 + 1] += k
+        self.diff[r1 + 1][c2 + 2] -= k
+        self.diff[r2 + 2][c1 + 1] -= k
+        self.diff[r2 + 2][c2 + 2] += k
+
+    def update(self) -> None:
+        """遍历矩阵，还原对应元素的增量"""
+        for i in range(self.ROW):
+            for j in range(self.COL):
+                # 差分数组的前缀和即为nums[i]
+                self.diff[i + 1][j + 1] += (
+                        self.diff[i + 1][j] + self.diff[i][j + 1] - self.diff[i][j]
+                )
+                self.matrix[i][j] += self.diff[i + 1][j + 1]
+
+    def commonMethod(self, n: int, queries: List[List[int]]):
+        """常规做法"""
+        diff = [[0] * (n + 1) for _ in range(n + 1)]
+        for r1, c1, r2, c2 in queries:
+            diff[r2 + 1][c2 + 1] += 1
+            diff[r2 + 1][c1] -= 1
+            diff[r1][c2 + 1] -= 1
+            diff[r1][c1] += 1
+        mat = [[0] * (n + 1) for _ in range(n + 1)]
+        for i in range(n):
+            for j in range(n):
+                mat[i + 1][j + 1] = mat[i][j + 1] + mat[i + 1][j] - mat[i][j] + diff[i][j]
+
+        del mat[0]
+        for row in mat:
+            del row[0]
+        return mat
+
+
 if __name__ == '__main__':
     # t1 = time.time()
     # print(fibonacci(200))

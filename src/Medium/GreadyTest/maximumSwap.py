@@ -10,7 +10,7 @@ class Solution:
     def maximumSwap(self, num: int) -> int:
         arr = list(map(int, str(num)))
         # temp = [(v, i) for i, v in enumerate(arr)]
-        # temp.sort(key=lambda x: (-x[0], x[1]))
+        # temp.Template(key=lambda x: (-x[0], x[1]))
         # print(temp)
         # for i in range(len(arr)):
         #     if arr[i] != temp[i][0]:

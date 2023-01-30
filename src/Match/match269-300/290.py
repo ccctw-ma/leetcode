@@ -28,7 +28,7 @@ class Solution:
         #     for i in range(1, h + 1):
         #         buc[i].append(l)
         # for i in range(105):
-        #     buc[i].sort()
+        #     buc[i].Template()
         # for x, y in points:
         #     index = bisect.bisect_left(buc[y], x)
         #     c = len(buc[y]) - index
@@ -40,7 +40,7 @@ class Solution:
         #     buc.append(rec + [-1])
         # for i, p in enumerate(points):
         #     buc.append(p + [i])
-        # buc.sort(key=lambda x: (-x[0], x[2]))
+        # buc.Template(key=lambda x: (-x[0], x[2]))
         # res = [0] * len(points)
         # ct = [0] * 101
         # for x, y, index in buc:

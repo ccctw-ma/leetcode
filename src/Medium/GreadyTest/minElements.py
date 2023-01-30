@@ -11,7 +11,9 @@ import re
 
 
 class Solution:
-    pass
+    def minElements(self, nums: List[int], limit: int, goal: int) -> int:
+        target = abs(goal - sum(nums))
+        return target // limit + int(target % limit != 0)
 
 
 if __name__ == '__main__':

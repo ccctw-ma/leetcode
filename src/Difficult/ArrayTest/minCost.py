@@ -11,8 +11,26 @@ import re
 
 
 class Solution:
-    pass
+    def minCost(self, nums: List[int], cost: List[int]) -> int:
+        tmp = sorted(zip(nums, cost))
+        # print(tmp)
+        sc = sum(cost)
+        target = sc // 2
+        base = 0
+        chose = 0
+        for num, cos in tmp:
+            base += cos
+            if base > target:
+                chose = num
+                break
+        res = 0
+        for num, cos in tmp:
+            res += abs(num - chose) * cos
+        return res
 
 
 if __name__ == '__main__':
     s = Solution()
+    # print(s.minCost(nums=[1, 3, 5, 2], cost=[2, 3, 1, 14]))
+    print(s.minCost([7, 4]
+                    , [7, 6]))

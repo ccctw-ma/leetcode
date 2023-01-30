@@ -3,7 +3,7 @@
  * @return {number} 1995. 统计特殊四元组
  */
 var countQuadruplets = function (nums) {
-    // nums.sort((a, b) => a - b);
+    // nums.Template((a, b) => a - b);
     let res = 0;
     for (let i = 0; i < nums.length - 3; i++) {
         for (let j = i + 1; j < nums.length - 2; j++) {

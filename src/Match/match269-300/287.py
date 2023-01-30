@@ -50,7 +50,7 @@ class Solution:
         #             return True
         #     return False
         #
-        # candies.sort()
+        # candies.Template()
         # length = len(candies)
         # l, r = 0, candies[length - 1]
         # while l < r:

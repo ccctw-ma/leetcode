@@ -11,8 +11,25 @@ import re
 
 
 class Solution:
-    pass
+    def minimumSize(self, nums: List[int], maxOperations: int) -> int:
+        l, r = 1, max(nums)
+
+        def check(x):
+            cnt = 0
+            for e in nums:
+                cnt += (e - 1) // x
+            return cnt <= maxOperations
+
+        while l < r:
+            mid = (l + r) // 2
+            if check(mid):
+                r = mid
+            else:
+                l = mid + 1
+        return l
 
 
 if __name__ == '__main__':
     s = Solution()
+    # print(s.minimumSize(nums=[2, 4, 8, 2], maxOperations=4))
+    print(s.minimumSize(nums=[7, 17], maxOperations=2))

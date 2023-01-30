@@ -10,8 +10,25 @@ from bisect import bisect_left, bisect_right, insort, insort_left, insort_right
 
 
 class Solution:
-    pass
+    def cuttingRope(self, n: int) -> int:
+
+        @cache
+        def f(x):
+            if x == 1:
+                return 1
+            res = x
+            for i in range(1, x):
+                res = max(res, f(i) * f(x - i))
+            return res
+
+        if n == 2:
+            return 1
+        if n == 3:
+            return 2
+
+        return f(n)
 
 
 if __name__ == '__main__':
     s = Solution()
+    print(s.cuttingRope(2))

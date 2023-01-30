@@ -62,7 +62,7 @@ const test03 = (n, arr) => {
     }
     // if (dp[half]) {
     //     let res1 = [], res2 = [];
-    //     arr.sort((a, b) => b - a);
+    //     arr.Template((a, b) => b - a);
     //     let count =
     //     for (let num of arr) {
     //         if (num)

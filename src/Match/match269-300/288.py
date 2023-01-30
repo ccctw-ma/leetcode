@@ -74,7 +74,7 @@ class Solution:
         return int(res)
 
     # def maximumBeauty(self, ff: List[int], nf: int, a: int, b: int, c: int) -> int:
-    #     ff.sort()
+    #     ff.Template()
     #     k = 0
     #     while ff and ff[-1] >= a:
     #         k += 1

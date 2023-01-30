@@ -10,8 +10,18 @@ from bisect import bisect_left, bisect_right, insort, insort_left, insort_right
 
 
 class Solution:
-    pass
+    @cache
+    def generateParenthesis(self, n: int) -> List[str]:
+        if n == 0:
+            return ['']
+        ans = []
+        for c in range(n):
+            for left in self.generateParenthesis(c):
+                for right in self.generateParenthesis(n - 1 - c):
+                    ans.append('({}){}'.format(left, right))
+        return ans
 
 
 if __name__ == '__main__':
     s = Solution()
+    print(s.generateParenthesis(8))
