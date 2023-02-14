@@ -80,11 +80,15 @@ def usage_of_bisect():
     bisect.insort(a, 4)  # 找到位置插入
     # print(a)
     # [1, 2, 2, 4, 5, 8]
-    print(bisect.bisect_left(a, 8))
-    # 1
-    print(bisect.bisect_right(a, 8))
-    print(bisect.bisect(a, 2))
-    # 3
+    # [0, 1, 2, 3, 4, 5]
+    # >=
+    print(bisect.bisect_left(a, 8))  # 5
+    # >
+    print(bisect.bisect_right(a, 8))  # 6
+    # <=
+    print(bisect_right(a, 7) - 1)  # 4
+    # <
+    print(bisect_left(a, 1) - 1)  # -1
 
 
 # 8、列表去重
@@ -392,15 +396,10 @@ if __name__ == '__main__':
     # print(t2 - t1)
     # reduce_function()
     # dictionary_traversal()
-    # usage_of_bisect()
+    usage_of_bisect()
     # PriorityQueue_structure()
     # print(usage_of_bisect())
     # heapq_function()
     # sorted_container_function()
     # zip_longest_function()
-    usage_of_itertools()
-    # 2 ** 14284
-    num = 10
-    arr = bin(num)[2:]
-    print(arr)
-    print(gcd(0, 2))
+    # usage_of_itertools()
