@@ -1,7 +1,7 @@
 import time, re
 from typing import List, Tuple, Union, Optional
 from heapq import heappop, heappush, heapify, heappushpop, heapreplace
-from collections import defaultdict, deque, Counter
+from collections import defaultdict, deque, Counter, OrderedDict
 from itertools import accumulate, permutations, combinations, product, compress, zip_longest, pairwise, groupby, \
     combinations_with_replacement
 from math import perm, comb, gcd, lcm, inf, ceil, floor, factorial, dist, sqrt
@@ -259,6 +259,63 @@ def usage_of_itertools():
     print(comb(4, 2))
 
 
+# 22、usageofOrderDict()
+def usage_of_OrderDict():
+    orderDict = OrderedDict()
+    orderDict[1] = 1
+    orderDict[2] = 2
+    orderDict[3] = 3
+    orderDict.popitem(last=False)
+    orderDict.move_to_end(2)
+    orderDict[2] = 4
+    orderDict[20] = 20
+    orderDict[1] = 100
+    print(orderDict.items())
+
+
+def usage_of_bitOpertion():
+    """
+    i&(i - 1)
+    消去二进制里的最后一个0
+    """
+    print("i & (i - 1)")
+    i = 100
+    while i:
+        print(bin(i))
+        i = i & (i - 1)
+    # 0b1100100
+    # 0b1100000
+    # 0b1000000
+
+    """
+    i += i & (-i)
+    i -= i & (-i)
+    用于线段树更新与查询操作
+    """
+    print("i += i & (-i)")
+    i = 99
+    while i < 1024:
+        print(bin(i))
+        i += i & (-i)
+    print("i -= i & (-i)")
+    i = 99
+    while i:
+        print(bin(i))
+        i -= i & (- i)
+
+    """
+    m = s
+    s = (s - 1) & m
+    求得s在二进制下的所有子集
+    """
+    print("s = (s - 1) & m")
+    s = m = 100
+    while True:
+        print(bin(s))
+        s = (s - 1) & m
+        if s == m: break
+
+
 def countSpecialNumbers(self, n: int) -> int:  # 小于等于n的  没有重复digit的num 的 个数
     digits = []
     while n > 0:
@@ -396,10 +453,12 @@ if __name__ == '__main__':
     # print(t2 - t1)
     # reduce_function()
     # dictionary_traversal()
-    usage_of_bisect()
+    # usage_of_bisect()
+    # usage_of_OrderDict()
     # PriorityQueue_structure()
     # print(usage_of_bisect())
     # heapq_function()
     # sorted_container_function()
     # zip_longest_function()
     # usage_of_itertools()
+    usage_of_bitOpertion()

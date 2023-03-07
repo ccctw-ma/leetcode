@@ -66,3 +66,4 @@ if __name__ == '__main__':
     p = Prime(10 ** 4)
     print(p.primes)
     print(p.dissolve(4))
+    print(p.dissolve(328))
