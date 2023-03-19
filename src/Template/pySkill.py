@@ -460,5 +460,6 @@ if __name__ == '__main__':
     # heapq_function()
     # sorted_container_function()
     # zip_longest_function()
-    # usage_of_itertools()
-    usage_of_bitOpertion()
+    usage_of_itertools()
+    # usage_of_bitOpertion()
+
