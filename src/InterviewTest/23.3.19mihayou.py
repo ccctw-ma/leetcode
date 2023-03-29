@@ -121,72 +121,31 @@ from bisect import bisect_left, bisect_right, insort, insort_left, insort_right
 # # cnt2 = len(set([find(f2, x) for x in range(m * n)]))
 # print(dsu1.setsCount - dsu2.setsCount)
 
+
+
 def f(s):
-    buc = Counter()
-    remain = ''
-    f = True
+    a, b = '', ''
     for c in s:
         if c in 'mhy':
-            buc[c] += 1
-            if buc['h'] > buc['m'] or buc['y'] > buc['h'] or buc['y'] > buc['m']:
-                f = False
-                break
+            a += c
         else:
-            remain += c
-    if f:
-        return remain
-    else:
-        return '#'
-
-
-def ff(s, t):
-    c1 = Counter(s)
-    c2 = Counter(t)
-    c = c2 - c1
-    for k in c:
-        if k not in 'mhy':
-            return False
-    return c['m'] == c['h'] == c['y']
-
-
-def check(s, t):
-    if not ff(s, t):
-        return False
-    s = f(s)
-    if s == '#':
-        return False
-    diff = ''
-    i = j = 0
-    m, n = len(s), len(t)
-    while i < m and j < n:
-        if s[i] == t[j]:
-            i += 1
-            j += 1
-        else:
-            diff += t[j]
-            j += 1
-    if i != m:
-        return False
-    diff += t[j:]
-    cnt = Counter(diff)
-    a, b, c = cnt['m'], cnt['h'], cnt['y']
-    if a != b or b != c or a != c or a + b + c != len(diff):
-        return False
-    buc = Counter()
-    for c in diff:
-        buc[c] += 1
-        if buc['h'] > buc['m'] or buc['y'] > buc['h'] or buc['y'] > buc['m']:
-            return False
-    return True
-
+            b += c
+    return a, b
 
 q = int(input())
 for _ in range(q):
     s, t = input(), input()
     m, n = len(s), len(t)
-    if m > n:
-        s, t = t, s
-    if check(s, t):
+    a1, b1 = f(s)
+    a2, b2 = f(t)
+    if b1 != b2:
+        print("No")
+    buc = Counter()
+    for c in a1:
+        buc[c] += 1
+    for c in a2:
+        buc[c] -= 1
+    if buc['m'] == buc['h'] == buc['y']:
         print('Yes')
     else:
         print('No')

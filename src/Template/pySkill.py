@@ -290,7 +290,7 @@ def usage_of_bitOpertion():
     """
     i += i & (-i)
     i -= i & (-i)
-    用于线段树更新与查询操作
+    用于树状数组更新与查询操作
     """
     print("i += i & (-i)")
     i = 99
@@ -460,6 +460,6 @@ if __name__ == '__main__':
     # heapq_function()
     # sorted_container_function()
     # zip_longest_function()
-    usage_of_itertools()
-    # usage_of_bitOpertion()
+    # usage_of_itertools()
+    usage_of_bitOpertion()
 
