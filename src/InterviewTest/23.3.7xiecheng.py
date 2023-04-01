@@ -75,6 +75,11 @@ loves = list(map(int, input().split(" ")))
 #
 #
 # print(f(0, x))
+
+
+"""
+垃圾题目， 妈的卡python运行时间， 用java就可以过
+"""
 res = 0
 dp = [[0] * (x + 1) for _ in range(n + 1)]
 
