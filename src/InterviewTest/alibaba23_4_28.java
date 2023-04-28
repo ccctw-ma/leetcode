@@ -1,6 +1,6 @@
-package Template;
+package InterviewTest;
 
-public class KMP {
+public class alibaba23_4_28 {
 
     public static int[] getNext(String pattern) {
         int[] next = new int[pattern.length()];
@@ -33,15 +33,18 @@ public class KMP {
         }
         return -1;
     }
+    public static String delete_str(String s, String t) {
+        int index = kmp(s, t);
+        if (index == -1) {
+            return s;
+        } else {
+            String left = s.substring(0, index);
+            String right = s.substring(index + t.length());
+            return left + right;
+        }
+    }
 
     public static void main(String[] args) {
-        String text = "ABABDABACDABABCABAB";
-        String pattern = "ABABCABAB";
-        int index = kmp(text, pattern);
-        if (index != -1) {
-            System.out.println("Pattern found at index " + index);
-        } else {
-            System.out.println("Pattern not found");
-        }
+        System.out.println(delete_str("abcefg", "ced"));
     }
 }

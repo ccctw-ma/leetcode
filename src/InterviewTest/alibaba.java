@@ -82,10 +82,33 @@ public class alibaba {
         return ss1 * ss2;
     }
 
+    public static int test03(int[] arr, int n) {
+        int[] ones = new int[32];
+        int[] zeros = new int[32];
+        for (int c : arr) {
+            for (int i = 0; i <= 31; i++) {
+                int tmp = 1 << i;
+                if ((c & tmp) == 0) {
+                    zeros[i]++;
+                } else {
+                    ones[i]++;
+                }
+            }
+        }
+        int res = 0;
+        for (int i = 0; i < 32; i++) {
+            res += Math.min(ones[i], zeros[i]);
+        }
+        return res;
+    }
+
+
     public static void main(String[] args) {
-        System.out.println(test01(new int[]{10, 20, 20, 30, 30}));
+//        System.out.println(test01(new int[]{10, 20, 20, 30, 30}));
 //        System.out.println(test01(new int[]{3, 4, 5, 6, 7}));
 //        System.out.println(test02(new int[][]{{1, 1, 0}, {1, 2, 0},{1,2, 1}, {2, 1, 0}, {2, 1, 1}, {1, 3, 0}, {1, 3, 1}, {1, 3, 2}}));
+        System.out.println(test03(new int[]{3, 4, 6}, 3));
+        System.out.println(test03(new int[]{9, 9, 9, 9}, 4));
     }
 
 
