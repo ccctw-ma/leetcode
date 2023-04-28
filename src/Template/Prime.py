@@ -63,7 +63,12 @@ class Prime:
 
 
 if __name__ == '__main__':
-    p = Prime(10 ** 4)
-    print(p.primes)
-    print(p.dissolve(4))
-    print(p.dissolve(328))
+    p = Prime(10 ** 6)
+    ps = p.primes
+    s = set(ps)
+    n = len(ps)
+    for i in range(n):
+        if ps[i] + 2 in s and 2 * ps[i] + 2 in s and 2 * ps[i] + 2 <= 10 ** 6:
+            print(ps[i])
+
+

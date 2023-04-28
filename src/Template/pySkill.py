@@ -290,7 +290,7 @@ def usage_of_bitOpertion():
     """
     i += i & (-i)
     i -= i & (-i)
-    用于线段树更新与查询操作
+    用于树状数组更新与查询操作
     """
     print("i += i & (-i)")
     i = 99
@@ -314,6 +314,37 @@ def usage_of_bitOpertion():
         print(bin(s))
         s = (s - 1) & m
         if s == m: break
+
+
+def usage_of_quickMatrixPower():
+    def matrix_power(matrix, power):
+        result = [[int(i == j) for j in range(len(matrix))] for i in range(len(matrix))]
+        while power > 0:
+            if power % 2 == 1:
+                result = matrix_multiply(result, matrix)
+            matrix = matrix_multiply(matrix, matrix)
+            power //= 2
+        return result
+
+    def matrix_multiply(matrix1, matrix2):
+        result = [[0 for _ in range(len(matrix2[0]))] for _ in range(len(matrix1))]
+        for i in range(len(matrix1)):
+            for j in range(len(matrix2[0])):
+                for k in range(len(matrix2)):
+                    result[i][j] = (result[i][j] + matrix1[i][k] * matrix2[k][j]) % mod
+        return result
+
+    mod = 10 ** 9 + 7
+    matrix = [
+        [0, 1, 1, 0],
+        [1, 0, 1, 0],
+        [1, 1, 0, 0],
+        [3, 2, 3, 1]
+    ]
+    base = [[0, 0, 0, 1]]
+    power = 10 ** 8
+    result = matrix_multiply(base, matrix_power(matrix, power))
+    print(result)
 
 
 def countSpecialNumbers(self, n: int) -> int:  # 小于等于n的  没有重复digit的num 的 个数
@@ -460,6 +491,6 @@ if __name__ == '__main__':
     # heapq_function()
     # sorted_container_function()
     # zip_longest_function()
-    usage_of_itertools()
+    # usage_of_itertools()
     # usage_of_bitOpertion()
-
+    usage_of_quickMatrixPower()
