@@ -65,10 +65,16 @@ for (let [k, v] of Object.entries(buc)) {
     }
 }
 let res = ''
-for(let c of format){
-    if(c !== '[' && c !== ']'){
+for (let c of format) {
+    if (c !== '[' && c !== ']') {
         res += c
     }
 }
 console.log(res)
 
+
+let arr = [
+    {t: "1"}, {t: "4"}, {t: "3"}
+]
+arr.sort((a, b) => a.t - b.t)
+console.log(arr)

@@ -11,12 +11,16 @@ from bisect import bisect_left, bisect_right, insort, insort_left, insort_right
 
 
 class Solution:
-    pass
-
+    def isValid(self, s: str) -> bool:
+        while s:
+            t = s.replace("abc", "")
+            if len(t) == len(s):
+                return False
+            s = t
+        return True
 
 if __name__ == '__main__':
     s = Solution()
-    buc = OrderedDict()
-    for i in range(10, 0, - 1):
-        buc[i] = 21
-    print(buc)
+    print(s.isValid(
+        "abccba"))
+    print(s.isValid("aabcbabcc"))
