@@ -13,17 +13,22 @@ m, n = list(map(int, input().split(" ")))
 grid = []
 for _ in range(m):
     grid.append([x for x in input()])
+
+
 def fn(g):
     f = list(range(m * n))
+
     def find(x):
         while x != f[x]:
             f[x] = f[f[x]]
             x = f[x]
         return f[x]
+
     def union(x, y):
         px, py = find(x), find(y)
         if px != py:
             f[py] = px
+
     for i in range(m):
         for j in range(n):
             if i + 1 < m and g[i][j] == g[i + 1][j] == 'R':
@@ -36,6 +41,8 @@ def fn(g):
             if g[i][j] == 'R':
                 res.add(find(i * n + j))
     return len(res)
+
+
 for i in range(m):
     tmp = []
     for j in range(n):
@@ -46,7 +53,24 @@ for i in range(m):
     print(" ".join(tmp))
 
 
-
+def fn2():
+    n, k = map(int, input().split())
+    nums = list(map(int, input().split()))
+    dp = [-1] * k
+    dp[0] = 0
+    res = -1
+    for i, c in enumerate(nums):
+        m = c % k
+        tar = (k - m) % k
+        if [tar] != -1:
+            res = max(res, c + dp[tar])
+        tmp = dp[:]
+        for i, e in enumerate(dp):
+            if e != -1:
+                next = (i + m) % k
+                tmp[next] = max(tmp[next], dp[i] + c)
+        dp = tmp
+    print(res)
 
 # 3 3
 # WRW

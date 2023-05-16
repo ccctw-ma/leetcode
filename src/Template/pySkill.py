@@ -2,8 +2,7 @@ import time, re
 from typing import List, Tuple, Union, Optional
 from heapq import heappop, heappush, heapify, heappushpop, heapreplace
 from collections import defaultdict, deque, Counter, OrderedDict
-from itertools import accumulate, permutations, combinations, product, compress, zip_longest, pairwise, groupby, \
-    combinations_with_replacement
+from itertools import accumulate, permutations, combinations, product, compress, zip_longest, pairwise, groupby, combinations_with_replacement, count
 from math import perm, comb, gcd, lcm, inf, ceil, floor, factorial, dist, sqrt
 from functools import cache, lru_cache, reduce
 from sortedcontainers import SortedList, SortedSet, SortedDict
@@ -257,6 +256,9 @@ def usage_of_itertools():
 
     print(perm(4, 2))
     print(comb(4, 2))
+
+    for i in count(2, 10):
+        print(i)
 
 
 # 22、usageofOrderDict()

@@ -2,3 +2,7 @@ LeetCode.iml
 .idea
 out
 venv
+
+# Added by cargo
+
+/target
