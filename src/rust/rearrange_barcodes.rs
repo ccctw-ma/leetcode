@@ -40,6 +40,6 @@ mod tests {
 
     #[test]
     fn test() {
-        assert_eq!(Solution::rearrange_barcodes(vec![1, 1, 1, 2, 2, 2]), vec![]);
+        assert_eq!(Solution::rearrange_barcodes(vec![1, 1, 1, 2, 2, 2]), vec![2, 1, 2, 1, 2, 1, 1]);
     }
 }

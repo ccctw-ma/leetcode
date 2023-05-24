@@ -39,8 +39,8 @@ fn to_tuple(x: &Vec<i32>) -> ((u128, u128, u128), (u128, u128, u128)) {
 
 impl Solution {
     pub fn max_equal_rows_after_flips(matrix: Vec<Vec<i32>>) -> i32 {
-        let n = matrix.len();
-        let m = matrix[0].len();
+        let _n = matrix.len();
+        let _m = matrix[0].len();
         let mut hm = std::collections::HashMap::new();
         for v in &matrix {
             let t = to_tuple(v);

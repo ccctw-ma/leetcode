@@ -29,4 +29,8 @@ fn main() {
     let i: i32 = 0;
     let j = (i - 1) ;
     println!("{}", j);
+
+    let mut a = Some(23);
+    let b = a.take();
+    println!("{}", a.is_none());
 }
